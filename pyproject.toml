@@ -3,7 +3,7 @@ name = "industrial-ai"
 version = "0.1.0"
 description = "Symulator czujników maszyn przemysłowych do predictive maintenance i detekcji anomalii"
 requires-python = ">=3.10"
-dependencies = ["pandas"]
+dependencies = ["pandas", "scikit-learn"]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]

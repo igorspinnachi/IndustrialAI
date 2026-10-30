@@ -40,6 +40,21 @@ rotational_speed, is_anomaly, fault`.
 | `bearing_wear` | narastające wibracje i lekki wzrost temperatury    |
 | `overheating`  | szybko narastająca temperatura                     |
 
+## Detekcja anomalii
+
+[detector/anomaly.py](detector/anomaly.py) to detektor hybrydowy uczony tylko na
+zdrowych danych: Isolation Forest + reguła z-score. Cechy to surowe odczyty oraz
+średnie kroczące temperatury i wibracji (wykrywają powolny dryf).
+
+```bash
+python -m detector.anomaly --fault overheating
+```
+
+Sam Isolation Forest słabo wykrywał awarię `overheating` (recall 0.26–0.59 zależnie
+od ziarna), bo opiera się na rangach wartości, a nie na wielkości odchylenia
+pojedynczego kanału. Dodanie reguły z-score podnosi recall do ok. 0.99 przy
+niskim odsetku fałszywych alarmów.
+
 ## Testy
 
 ```bash
